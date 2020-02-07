@@ -1,7 +1,7 @@
 const { MasterHandle } = require("opaque");
 const { UPLOAD_OPTIONS, DOWNLOAD_OPTIONS } = require("./config");
 
-class Account {
+class OpqHandler {
   constructor(handle) {
     this.masterHandle = this.generateMasterHandle(handle);
   }
@@ -13,7 +13,7 @@ class Account {
     );
   }
 
-  uploadFile(file) {
+  uploadImage(file) {
     return new Promise((resolve, reject) => {
       const upload = this.masterHandle.uploadFile("/", file);
 
@@ -22,6 +22,17 @@ class Account {
       });
     });
   }
+
+  downloadImage(handle) {
+    return new Promise(async (resolve, reject) => {
+      console.log(this.masterHandle);
+      const download = this.masterHandle;
+
+      download.on("download-progress", res => {
+        resolve(res);
+      });
+    });
+  }
 }
 
-module.exports = Account;
+module.exports = OpqHandler;
