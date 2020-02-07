@@ -1,7 +1,15 @@
 import React from 'react';
 
+import FileUpload from './components/FileUpload';
+import GlobalStyles from './components/GlobalStyles';
+
 const App = () => {
-  return <div>Hello world!</div>;
+  return (
+    <>
+      <GlobalStyles />
+      <FileUpload />
+    </>
+  );
 };
 
 export default App;
