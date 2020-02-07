@@ -11,7 +11,8 @@ const UPLOAD_OPTIONS = {
 };
 
 const DOWNLOAD_OPTIONS = {
-  endpoint: API.STORAGE_NODE
+  endpoint: API.STORAGE_NODE,
+  autostart: true
 };
 
 module.exports = { UPLOAD_OPTIONS, DOWNLOAD_OPTIONS };

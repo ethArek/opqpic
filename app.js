@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-const api = require("./API");
+const api = require("./api");
 
 app.use(bodyParser.json({ limit: "3mb" }));
 app.use(
