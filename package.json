@@ -4,16 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "client": "cd client && npm start",
+    "server": "nodemon app.js",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
+    "concurrently": "^5.1.0",
     "express": "^4.17.1",
-    "express-handlebars": "^3.1.0",
     "mongoose": "^5.8.11",
+    "nodemon": "^2.0.2",
     "opaque": "https://github.com/opacity/opaque.git#0.4.2"
   }
 }
