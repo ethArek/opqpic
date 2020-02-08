@@ -8,7 +8,6 @@ router.post("/", async (req, res) => {
 router.get("/:handle", async (req, res) => {
   try {
     const image = await downloadImage(req.params.handle);
-    console.log(image);
   } catch (err) {
     console.log(err);
   }

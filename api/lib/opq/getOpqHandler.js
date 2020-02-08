@@ -1,7 +1,9 @@
 const OpqHandler = require("./OpqHandler");
 
+let opqHandler = null;
+
 const getOpqHandler = handle => {
-  return new OpqHandler(handle);
+  return opqHandler ? opqHandler : (opqHandler = new OpqHandler(handle));
 };
 
 module.exports = getOpqHandler;
