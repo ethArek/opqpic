@@ -26,17 +26,10 @@ class OpqHandler {
     });
   }
 
-  async getImageData(handle) {
+  async getDownloadUrl(handle) {
     const downloadHandler = this.masterHandle.downloadFile(handle);
-    downloadHandler.startDownload();
 
-    try {
-      const result = {
-        buffer: await downloadHandler.toBuffer()
-        // metadata: await downloadHandler.downloadMetadata()
-      };
-      return result;
-    } catch (err) {}
+    return downloadHandler.getDownloadURL();
   }
 }
 
