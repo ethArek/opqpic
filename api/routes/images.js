@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const { uploadImage, getDownloadUrl } = require("../lib/internal/images");
+const createErrorResponse = require("../lib/internal/createErrorResponse");
 
 router.post("/", async (req, res) => {
   const { file } = req.body;
@@ -13,9 +14,7 @@ router.post("/", async (req, res) => {
       }
     });
   } catch (err) {
-    res.status(500).json({
-      error: "Internal server error"
-    });
+    createErrorResponse(res, err);
   }
 });
 
@@ -23,7 +22,7 @@ router.post("/", async (req, res) => {
 //   try {
 //     const image = await getDownloadUrl(req.params.handle);
 //   } catch (err) {
-//     console.log(err);
+//     createErrorResponse(res, err);
 //   }
 
 //   res.json();

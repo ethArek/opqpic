@@ -62,7 +62,7 @@ UserSchema.statics.findByCredentials = async function(email, password) {
   const User = this;
   const user = await User.findOne({ email });
   if (!user) {
-    return Promise.reject("user.not_found");
+    return Promise.reject(new Error("User not found"));
   }
 
   return new Promise(async (resolve, reject) => {
@@ -85,9 +85,7 @@ UserSchema.methods.generateAuthToken = async function() {
     user.accessToken = token;
     await user.save();
     return token;
-  } catch (err) {
-    console.log(err);
-  }
+  } catch (err) {}
 };
 
 UserSchema.statics.findByToken = function(token) {

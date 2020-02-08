@@ -1,10 +1,11 @@
 const router = require("express").Router();
 const User = require("../../models/User");
+const { login } = require("../lib/internal/users");
+const createErrorResponse = require("../lib/internal/createErrorResponse");
 require("../../db");
 
 router.post("/", async (req, res) => {
   const { email, password } = req.body;
-  console.log("tu");
   const user = new User({
     email,
     password
@@ -16,9 +17,7 @@ router.post("/", async (req, res) => {
       data: { user }
     });
   } catch (err) {
-    res.status(500).json({
-      error: "Internal server error"
-    });
+    createErrorResponse(res, err);
   }
 });
 
@@ -32,41 +31,19 @@ router.get("/", async (req, res) => {
       data: { user }
     });
   } catch (err) {
-    let status = 500;
-    if (err.message === "User not found") {
-      status = 404;
-    }
-    res.status(status).json({
-      error: err.message || "Internal server error"
-    });
+    createErrorResponse(res, err);
   }
 });
 
 router.post("/login", async (req, res) => {
   try {
-    const { email, password } = req.body;
-    const user = await User.findByCredentials(email, password);
-    if (!user) {
-      throw new Error("User not found");
-    }
-
-    const token = await user.generateAuthToken();
-    const result = {
-      user,
-      token
-    };
+    const result = await login(req.body);
 
     res.json({
       data: result
     });
   } catch (err) {
-    let status = 500;
-    if (err.message === "User not found") {
-      status = 404;
-    }
-    res.status(status).json({
-      error: err.message || "Internal server error"
-    });
+    createErrorResponse(res, err);
   }
 });
 
