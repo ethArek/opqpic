@@ -2,6 +2,7 @@ const router = require("express").Router();
 const User = require("../../models/User");
 const { login } = require("../lib/internal/users");
 const createErrorResponse = require("../lib/internal/createErrorResponse");
+const auth = require("../middlewares/authentication");
 require("../../db");
 
 router.post("/", async (req, res) => {
@@ -21,14 +22,10 @@ router.post("/", async (req, res) => {
   }
 });
 
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
   try {
-    await User.findByToken(req.body.token);
-    if (!user) {
-      throw new Error("User not found");
-    }
     res.json({
-      data: { user }
+      data: { user: req.user }
     });
   } catch (err) {
     createErrorResponse(res, err);
