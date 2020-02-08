@@ -18,7 +18,7 @@ const Test = () => {
       { uploadOpts: UPLOAD_OPTIONS, downloadOpts: DOWNLOAD_OPTIONS }
     );
     const downloadHandler = opqHandler.downloadFile(
-      'a28ed0e967b5f73a0ea2033976f936bd2543b6954bb9674b921b79eeb01eff805cbb62d29d1306accded394fc3553b3ea0455d641fb5c818e1565ff8daa37fb3'
+      '837397c61b6602b94d1df8524fe685fc8b300cba4b1f6a310c9dd2d5e982d042650d9d74f37e8d277c8251abbae27dff9896aed7736a1c28e671e42d7652793c'
     );
     downloadHandler.toFile().then((file: any) => {
       const reader = new FileReader();
@@ -37,11 +37,11 @@ const Test = () => {
 
 const App = () => {
   return (
-    <>
-      <GlobalStyles />
-      <FileUpload />
-    </>
-    // <Test />
+    // <>
+    //   <GlobalStyles />
+    //   <FileUpload />
+    // </>
+    <Test />
   );
 };
 

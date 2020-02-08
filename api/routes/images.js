@@ -1,11 +1,30 @@
-const router = require("express").Router();
-const { uploadImage, getDownloadUrl } = require("../lib/internal/images");
-const createErrorResponse = require("../lib/internal/createErrorResponse");
+const router = require('express').Router();
+const { uploadImage, getDownloadUrl } = require('../lib/internal/images');
+const createErrorResponse = require('../lib/internal/createErrorResponse');
 
-router.post("/", async (req, res) => {
-  const { file } = req.body;
+router.post('/', async (req, res) => {
+  const { fileBase64, name } = req.body;
+
+  function decodeBase64Image(dataString) {
+    var matches = dataString.match(/^data:([A-Za-z-+\/]+);base64,(.+)$/);
+    var response = {};
+
+    if (matches.length !== 3) {
+      return new Error('Invalid input string');
+    }
+
+    response.type = matches[1];
+    response.data = new Buffer(matches[2], 'base64');
+
+    return response;
+  }
 
   try {
+    const buffer = Buffer.from(decodeBase64Image(fileBase64).data, 'base64');
+    const file = {
+      name,
+      data: buffer
+    };
     const imageDetails = await uploadImage(file);
 
     res.status(201).json({

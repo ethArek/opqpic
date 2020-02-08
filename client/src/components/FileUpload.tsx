@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 
 import Button from './styled/Button';
@@ -8,8 +9,21 @@ function FileUpload() {
   const [file, setFile] = useState<File>();
 
   function handleChange(e: React.FormEvent<HTMLInputElement>) {
-    setFile(e.currentTarget.files![0]);
-    console.log(e.currentTarget.files![0]);
+    const file = e.currentTarget.files![0];
+    const reader = new FileReader();
+    setFile(file);
+
+    reader.onload = (event: any) => {
+      axios
+        .post('/api/images', {
+          fileBase64: event.target.result,
+          name: file.name
+        })
+        .then(res => console.log(res))
+        .catch(err => console.log(err));
+    };
+
+    reader.readAsDataURL(file);
   }
 
   return (
