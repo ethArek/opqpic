@@ -6,8 +6,10 @@ import upload from '../assets/upload.svg';
 
 function FileUpload() {
   const [file, setFile] = useState<File>();
+
   function handleChange(e: React.FormEvent<HTMLInputElement>) {
     setFile(e.currentTarget.files![0]);
+    console.log(e.currentTarget.files![0]);
   }
 
   return (
