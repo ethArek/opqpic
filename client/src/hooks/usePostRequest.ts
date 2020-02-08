@@ -1,9 +1,17 @@
 import { useState, useCallback } from 'react';
 import axios from 'axios';
 
+type Result = {
+  data: {
+    imageDetails: {
+      handle: string;
+    };
+  };
+};
+
 function usePostRequest(url: string, data: any) {
   const [isLoading, setIsLoading] = useState(false);
-  const [result, setResult] = useState();
+  const [responseData, setResponseData] = useState();
   const [error, setError] = useState('');
 
   const callApi = useCallback(() => {
@@ -11,8 +19,8 @@ function usePostRequest(url: string, data: any) {
       setIsLoading(true);
 
       try {
-        const result = await axios(url, { data, method: 'POST' });
-        setResult(result);
+        const result: Result = await axios(url, { data, method: 'POST' });
+        setResponseData(result.data);
       } catch (error) {
         setError(error);
       } finally {
@@ -23,7 +31,7 @@ function usePostRequest(url: string, data: any) {
     sendData();
   }, [data, url]);
 
-  return [{ isLoading, result, error }, callApi] as any;
+  return [{ isLoading, responseData, error }, callApi] as any;
 }
 
 export default usePostRequest;

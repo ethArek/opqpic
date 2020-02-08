@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import usePostRequest from '../hooks/usePostRequest';
@@ -13,7 +14,12 @@ type FileData = {
 function FileUpload() {
   const [file, setFile] = useState<File>();
   const [fileData, setFileData] = useState<FileData>();
-  const [_, callApi] = usePostRequest('/api/images', fileData);
+  const [{ responseData }, callApi] = usePostRequest('/api/images', fileData);
+  const history = useHistory();
+
+  useEffect(() => {
+    history.push(responseData?.data?.imageDetails?.handle);
+  }, [history, responseData]);
 
   function handleChange(e: React.FormEvent<HTMLInputElement>) {
     const file = e.currentTarget.files![0];
