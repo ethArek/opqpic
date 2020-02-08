@@ -1,12 +1,19 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import styled from 'styled-components';
 
+import usePostRequest from '../hooks/usePostRequest';
 import Button from './styled/Button';
 import upload from '../assets/upload.svg';
 
+type FileData = {
+  fileBase64: string;
+  name: string;
+};
+
 function FileUpload() {
   const [file, setFile] = useState<File>();
+  const [fileData, setFileData] = useState<FileData>();
+  const [_, callApi] = usePostRequest('/api/images', fileData);
 
   function handleChange(e: React.FormEvent<HTMLInputElement>) {
     const file = e.currentTarget.files![0];
@@ -14,13 +21,12 @@ function FileUpload() {
     setFile(file);
 
     reader.onload = (event: any) => {
-      axios
-        .post('/api/images', {
-          fileBase64: event.target.result,
-          name: file.name
-        })
-        .then(res => console.log(res))
-        .catch(err => console.log(err));
+      const data = {
+        fileBase64: event.target.result,
+        name: file.name
+      };
+
+      setFileData(data);
     };
 
     reader.readAsDataURL(file);
@@ -36,7 +42,7 @@ function FileUpload() {
       )}
       {file && (
         <ButtonWrapper>
-          <Button>Upload</Button>
+          <Button onClick={() => callApi()}>Upload</Button>
         </ButtonWrapper>
       )}
     </Wrapper>
