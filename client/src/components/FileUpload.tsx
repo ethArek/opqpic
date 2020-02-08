@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import usePostRequest from '../hooks/usePostRequest';
 import Button from './styled/Button';
 import upload from '../assets/upload.svg';
+import AnimatedText from './AnimatedText';
 
 type FileData = {
   fileBase64: string;
@@ -14,12 +15,15 @@ type FileData = {
 function FileUpload() {
   const [file, setFile] = useState<File>();
   const [fileData, setFileData] = useState<FileData>();
-  const [{ responseData }, callApi] = usePostRequest('/api/images', fileData);
+  const [{ isLoading, responseData }, callApi] = usePostRequest(
+    '/api/images',
+    fileData
+  );
   const history = useHistory();
 
-  useEffect(() => {
-    history.push(responseData?.data?.imageDetails?.handle);
-  }, [history, responseData]);
+  // useEffect(() => {
+  //   history.push(responseData?.data?.imageDetails?.handle);
+  // }, [history, responseData]);
 
   function handleChange(e: React.FormEvent<HTMLInputElement>) {
     const file = e.currentTarget.files![0];
@@ -51,6 +55,7 @@ function FileUpload() {
           <Button onClick={() => callApi()}>Upload</Button>
         </ButtonWrapper>
       )}
+      <AnimatedText />
     </Wrapper>
   );
 }
