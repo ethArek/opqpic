@@ -14,7 +14,7 @@ async function downloadImage(handle) {
   const opqHandler = getOpqHandler(handle);
   const start = Date.now();
   const imageFile = await opqHandler.getImageData(
-    "a28ed0e967b5f73a0ea2033976f936bd2543b6954bb9674b921b79eeb01eff805cbb62d29d1306accded394fc3553b3ea0455d641fb5c818e1565ff8daa37fb3"
+    "eb5e7a688e67d6327cd399ed16c8e1a9c726cc69821d057ea18a7b84d7f5eb6f1a1bcd841d92e1a33099ba1c0754f353eec667a72e972ae58c860e54f00fe3dc"
   );
   console.log(Date.now() - start);
   return imageFile;
