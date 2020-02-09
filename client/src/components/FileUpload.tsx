@@ -102,12 +102,18 @@ function FileUpload() {
       )}
       {!file && (
         <>
-          <Info>Allowed extensions: jpg, jpeg, png, gif</Info>
-          <Info last>Maximum file size: 5MB</Info>
+          <Info>
+            Allowed extensions: <span>jpg, jpeg, png, gif</span>
+          </Info>
+          <Info last>
+            Maximum file size: <span>5MB</span>
+          </Info>
         </>
       )}
       {!file && (
         <Label>
+          <span>Click here to select file</span>
+          <i />
           <Input
             onChange={handleChange}
             type="file"
@@ -150,14 +156,34 @@ const Header = styled.h1`
 `;
 
 const Label = styled.label`
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 400px;
   height: 300px;
   border: 3px dashed #4257f5;
   margin-bottom: 40px;
   cursor: pointer;
-  background: url(${upload}) no-repeat center center;
-  background-size: 15%;
+
+  span {
+    color: #4257f5;
+    position: relative;
+    top: 20px;
+    font-size: 18px;
+    font-weight: 700;
+
+    &::after {
+      content: '';
+      background: url(${upload}) no-repeat center center;
+      background-size: 100%;
+      width: 60px;
+      height: 50px;
+      position: absolute;
+      left: 50%;
+      top: -60px;
+      transform: translateX(-50%);
+    }
+  }
 `;
 
 const Name = styled.h2`
@@ -171,11 +197,15 @@ const Name = styled.h2`
 `;
 
 const Info = styled.div`
-  font-size: 12px;
+  font-size: 14px;
   color: #333;
   margin-bottom: ${({ last }: { last?: boolean }) => (last ? '16px' : '8px')};
   font-style: italic;
   text-align: right;
+
+  span {
+    font-weight: 700;
+  }
 `;
 
 const ButtonWrapper = styled.div`

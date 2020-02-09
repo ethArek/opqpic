@@ -7,8 +7,11 @@ import opqLogo from '../assets/opq-logo.svg';
 function Navbar() {
   return (
     <Wrapper>
-      <Logo to="/">OPQ PIC</Logo>
-      <Opacity>
+      <Logo to="/">
+        OPQ PIC
+        <p>Image uploading and sharing platform</p>
+      </Logo>
+      <Opacity href="https://opacity.io" target="_blank">
         Powered by <img width="40" height="40" src={opqLogo} alt="Opacity" />
       </Opacity>
     </Wrapper>
@@ -29,11 +32,19 @@ const Logo = styled(Link)`
   font-weight: 700;
   color: #fff;
   text-decoration: none;
+
+  p {
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0;
+  }
 `;
 
-const Opacity = styled.div`
+const Opacity = styled.a`
   display: flex;
   align-items: center;
+  color: #fff;
+  text-decoration: none;
 
   img {
     margin-left: 8px;

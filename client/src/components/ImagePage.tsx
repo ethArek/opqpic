@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { MasterHandle } from 'opaque';
 import styled from 'styled-components';
 
-import { UPLOAD_OPTIONS, DOWNLOAD_OPTIONS } from '../config/opq';
+import { UPLOAD_OPTIONS, DOWNLOAD_OPTIONS, HANDLE } from '../config/opq';
 import useDocumentTitle from '../hooks/useDocumentTitle';
 import CopyUrl from './CopyUrl';
 import Loader from './Loader';
@@ -26,7 +26,7 @@ function ImagePage({
 
   useEffect(() => {
     const opqHandler = new MasterHandle(
-      { handle },
+      { handle: HANDLE },
       { uploadOpts: UPLOAD_OPTIONS, downloadOpts: DOWNLOAD_OPTIONS }
     );
     const downloadHandler = opqHandler.downloadFile(handle);
