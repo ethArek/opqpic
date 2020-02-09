@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 
 import usePostRequest from '../hooks/usePostRequest';
+import useDocumentTitle from '../hooks/useDocumentTitle';
 import Button from './styled/Button';
 import upload from '../assets/upload.svg';
 import Loader from './Loader';
@@ -35,6 +36,7 @@ function FileUpload() {
     fileData
   );
   const history = useHistory();
+  useDocumentTitle('OPQ PIC | Image Uploader');
 
   const headerText = isLoading
     ? `Uploading ${file!.name}...`

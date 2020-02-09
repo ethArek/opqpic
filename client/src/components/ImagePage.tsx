@@ -22,7 +22,7 @@ function ImagePage({
 }: IProps) {
   const [image, setImage] = useState<string>('');
   const [fileName, setFileName] = useState('');
-  useDocumentTitle(fileName);
+  useDocumentTitle(`OPQ PIC | ${fileName}`);
 
   useEffect(() => {
     const opqHandler = new MasterHandle(
