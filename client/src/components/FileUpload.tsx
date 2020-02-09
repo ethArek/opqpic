@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import styled from 'styled-components';
+import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import styled from "styled-components";
 
-import usePostRequest from '../hooks/usePostRequest';
-import Button from './styled/Button';
-import upload from '../assets/upload.svg';
-import AnimatedText from './AnimatedText';
+import usePostRequest from "../hooks/usePostRequest";
+import Button from "./styled/Button";
+import upload from "../assets/upload.svg";
+import AnimatedText from "./AnimatedText";
 
 type FileData = {
   fileBase64: string;
@@ -16,7 +16,7 @@ function FileUpload() {
   const [file, setFile] = useState<File>();
   const [fileData, setFileData] = useState<FileData>();
   const [{ isLoading, responseData }, callApi] = usePostRequest(
-    '/api/images',
+    "/api/images",
     fileData
   );
   const history = useHistory();
@@ -28,6 +28,7 @@ function FileUpload() {
   function handleChange(e: React.FormEvent<HTMLInputElement>) {
     const file = e.currentTarget.files![0];
     const reader = new FileReader();
+    console.log(file);
     setFile(file);
 
     reader.onload = (event: any) => {
