@@ -1,35 +1,55 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 import usePostRequest from '../hooks/usePostRequest';
 import Button from './styled/Button';
 import upload from '../assets/upload.svg';
-import AnimatedText from './AnimatedText';
+import Loader from './Loader';
+import Alert from './Alert';
 
 type FileData = {
   fileBase64: string;
   name: string;
 };
 
+const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'svg', 'bmp'];
+
+function isValidExtension(fileName: string): boolean {
+  const splittedFileName = fileName.split('.');
+  const chunksNumber = splittedFileName.length;
+
+  if (allowedExtensions.includes(splittedFileName[chunksNumber - 1])) {
+    return true;
+  }
+
+  return false;
+}
+
 function FileUpload() {
-  const [file, setFile] = useState<File>();
-  const [fileData, setFileData] = useState<FileData>();
+  const [file, setFile] = useState<File | null>();
+  const [fileData, setFileData] = useState<FileData | null>();
+  const [fileError, setFileError] = useState('');
   const [{ isLoading, responseData }, callApi] = usePostRequest(
     '/api/images',
     fileData
   );
   const history = useHistory();
 
-  // useEffect(() => {
-  //   history.push(responseData?.data?.imageDetails?.handle);
-  // }, [history, responseData]);
+  const headerText = isLoading
+    ? `Uploading ${file!.name}...`
+    : 'Upload your image';
+
+  useEffect(() => {
+    history.push(responseData?.data?.imageDetails?.handle);
+  }, [history, responseData]);
 
   function handleChange(e: React.FormEvent<HTMLInputElement>) {
     const file = e.currentTarget.files![0];
-    const reader = new FileReader();
+    setFileError('');
     setFile(file);
 
+    const reader = new FileReader();
     reader.onload = (event: any) => {
       const data = {
         fileBase64: event.target.result,
@@ -42,36 +62,98 @@ function FileUpload() {
     reader.readAsDataURL(file);
   }
 
+  function handleRemoveFile() {
+    setFileData(null);
+    setFile(null);
+  }
+
+  function handleUpload() {
+    if (file!.size > 5242880) {
+      return setFileError('Maxiumum file size is: 5MB');
+    }
+
+    if (!isValidExtension(file!.name)) {
+      return setFileError(
+        'Allowed extensions are: .jpg, .jpeg, .png, .gif, .svg, .bmp'
+      );
+    }
+
+    callApi();
+  }
+
+  function handleConfirm() {
+    handleRemoveFile();
+  }
+
   return (
     <Wrapper>
-      {file && <Name>{file.name}</Name>}
+      {!!fileError && (
+        <Alert
+          show={!!fileError}
+          title="Error"
+          text={fileError}
+          onConfirm={handleConfirm}
+        />
+      )}
+      <Header>{headerText}</Header>
+      {isLoading && <Loader />}
+      {file && !isLoading && (
+        <Name onClick={handleRemoveFile}>{file.name}</Name>
+      )}
+      {!file && (
+        <>
+          <Info>Allowed extensions: jpg, jpeg, png, gif</Info>
+          <Info last>Maximum file size: 5MB</Info>
+        </>
+      )}
       {!file && (
         <Label>
-          <Input onChange={handleChange} type="file" accept=".jpg, .png" />
+          <Input
+            onChange={handleChange}
+            type="file"
+            accept=".jpg, .jpeg, .png, .gif, .svg, .bmp"
+          />
         </Label>
       )}
-      {file && (
+      {file && !isLoading && (
         <ButtonWrapper>
-          <Button onClick={() => callApi()}>Upload</Button>
+          <Button onClick={handleUpload}>Upload</Button>
         </ButtonWrapper>
       )}
-      <AnimatedText />
     </Wrapper>
   );
 }
+
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+`;
 
 const Wrapper = styled.div`
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  animation: ${fadeIn} 1s linear;
+`;
+
+const Header = styled.h1`
+  color: #333;
+  font-size: 42px;
+  margin-bottom: 20px;
+  text-align: center;
 `;
 
 const Label = styled.label`
   display: block;
-  border: 3px dashed #aaa;
   width: 400px;
   height: 300px;
+  border: 3px dashed #4257f5;
   margin-bottom: 40px;
   cursor: pointer;
   background: url(${upload}) no-repeat center center;
@@ -79,8 +161,21 @@ const Label = styled.label`
 `;
 
 const Name = styled.h2`
-  font-size: 18px;
-  color: #1b1b1b;
+  font-size: 32px;
+  color: #333;
+  text-align: center;
+
+  &:hover {
+    text-decoration: line-through;
+  }
+`;
+
+const Info = styled.div`
+  font-size: 12px;
+  color: #333;
+  margin-bottom: ${({ last }: { last?: boolean }) => (last ? '16px' : '8px')};
+  font-style: italic;
+  text-align: right;
 `;
 
 const ButtonWrapper = styled.div`

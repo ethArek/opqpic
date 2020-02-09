@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const uuid = require('uuid');
 const { uploadImage, getDownloadUrl } = require('../lib/internal/images');
 const createErrorResponse = require('../lib/internal/createErrorResponse');
 
@@ -22,7 +23,7 @@ router.post('/', async (req, res) => {
   try {
     const buffer = Buffer.from(decodeBase64Image(fileBase64).data, 'base64');
     const file = {
-      name,
+      name: uuid().slice(0, 6) + name,
       data: buffer
     };
     const imageDetails = await uploadImage(file);

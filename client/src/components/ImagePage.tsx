@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { MasterHandle } from 'opaque';
+import styled from 'styled-components';
 
 import { UPLOAD_OPTIONS, DOWNLOAD_OPTIONS } from '../config/opq';
 import useDocumentTitle from '../hooks/useDocumentTitle';
@@ -40,7 +41,14 @@ function ImagePage({
     });
   }, [handle]);
 
-  return <img src={image} alt={fileName} />;
+  return <Image src={image} alt={fileName} />;
 }
+
+const Image = styled.img`
+  max-width: 100vw;
+  max-height: calc(100vh - 280px);
+  display: block;
+  margin: 100px auto;
+`;
 
 export default ImagePage;
