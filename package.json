@@ -25,6 +25,7 @@
     "nodemon": "^2.0.2",
     "opaque": "https://github.com/opacity/opaque.git#0.4.2",
     "request": "^2.88.0",
+    "uuid": "^3.4.0",
     "serve-index": "^1.9.1",
     "validator": "^12.2.0"
   }

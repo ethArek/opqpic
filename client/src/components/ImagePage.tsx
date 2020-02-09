@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { MasterHandle } from 'opaque';
+import styled from 'styled-components';
 
-import { UPLOAD_OPTIONS, DOWNLOAD_OPTIONS } from '../config/opq';
+import { UPLOAD_OPTIONS, DOWNLOAD_OPTIONS, HANDLE } from '../config/opq';
 import useDocumentTitle from '../hooks/useDocumentTitle';
+import CopyUrl from './CopyUrl';
+import Loader from './Loader';
 
 interface IProps {
   match: {
@@ -19,11 +22,11 @@ function ImagePage({
 }: IProps) {
   const [image, setImage] = useState<string>('');
   const [fileName, setFileName] = useState('');
-  useDocumentTitle(fileName);
+  useDocumentTitle(`OPQ PIC | ${fileName}`);
 
   useEffect(() => {
     const opqHandler = new MasterHandle(
-      { handle },
+      { handle: HANDLE },
       { uploadOpts: UPLOAD_OPTIONS, downloadOpts: DOWNLOAD_OPTIONS }
     );
     const downloadHandler = opqHandler.downloadFile(handle);
@@ -40,7 +43,19 @@ function ImagePage({
     });
   }, [handle]);
 
-  return <img src={image} alt={fileName} />;
+  return (
+    <>
+      <CopyUrl />
+      {image ? <Image src={image} alt={fileName} /> : <Loader />}
+    </>
+  );
 }
+
+const Image = styled.img`
+  max-width: 100vw;
+  max-height: calc(100vh - 200px);
+  display: block;
+  margin: 20px auto 100px auto;
+`;
 
 export default ImagePage;
