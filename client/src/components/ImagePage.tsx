@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { MasterHandle } from 'opaque';
+import { useHistory } from 'react-router-dom'
 import styled from 'styled-components';
 
 import { UPLOAD_OPTIONS, DOWNLOAD_OPTIONS, HANDLE } from '../config/opq';
@@ -23,6 +24,7 @@ function ImagePage({
   const [image, setImage] = useState<string>('');
   const [fileName, setFileName] = useState('');
   useDocumentTitle(`OPQ PIC | ${fileName}`);
+  const history = useHistory();
 
   useEffect(() => {
     const opqHandler = new MasterHandle(
@@ -40,8 +42,10 @@ function ImagePage({
       });
 
       reader.readAsDataURL(file);
+    }).catch(() => {
+      history.push('/');
     });
-  }, [handle]);
+  }, [handle, history]);
 
   return (
     <>
