@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
+import { Colors } from '../contants/colors';
 
 function Loader() {
   return (
@@ -35,7 +36,7 @@ const Wrapper = styled.div`
   div {
     width: 33%;
     height: 34%;
-    background-color: #4257f5;
+    background-color: ${Colors.PRIMARY};
     float: left;
     animation: ${cubeAnimation} 1.3s infinite ease-in-out;
 

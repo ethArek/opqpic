@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import opqLogo from '../assets/opq-logo.svg';
+import { Colors } from '../contants/colors';
 
 function Navbar() {
   return (
@@ -19,18 +20,18 @@ function Navbar() {
 }
 
 const Wrapper = styled.div`
-  background-color: #4257f5;
+  background-color: ${Colors.PRIMARY};
   padding: 20px 40px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  color: #fff;
+  color: ${Colors.WHITE};
 `;
 
 const Logo = styled(Link)`
   font-size: 24px;
   font-weight: 700;
-  color: #fff;
+  color: ${Colors.WHITE};
   text-decoration: none;
 
   p {
@@ -47,7 +48,7 @@ const Logo = styled(Link)`
 const Opacity = styled.a`
   display: flex;
   align-items: center;
-  color: #fff;
+  color: ${Colors.WHITE};
   text-decoration: none;
 
   img {

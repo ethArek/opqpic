@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
+import { Colors } from '../contants/colors';
 import Button from './styled/Button';
 
 function CopyUrl() {
@@ -22,13 +23,13 @@ function CopyUrl() {
 }
 
 const Wrapper = styled.div`
-  margin: 20px 0;
+  padding: 20px 0;
   display: flex;
   justify-content: center;
 
   input {
     width: 400px;
-    border: 2px solid #4287f5;
+    border: 2px solid ${Colors.PRIMARY};
     padding: 0 10px;
     box-shadow: unset;
     border-radius: 5px;
@@ -43,7 +44,6 @@ const Wrapper = styled.div`
     input {
       margin-bottom: 16px;
       height: 40px;
-
     }
   }
 `;
