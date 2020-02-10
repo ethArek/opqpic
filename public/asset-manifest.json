@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.js": "/static/js/main.36b829e2.chunk.js",
+    "main.js.map": "/static/js/main.36b829e2.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.107bb8ca.js",
+    "runtime-main.js.map": "/static/js/runtime-main.107bb8ca.js.map",
+    "static/css/2.764ccc25.chunk.css": "/static/css/2.764ccc25.chunk.css",
+    "static/js/2.261beeff.chunk.js": "/static/js/2.261beeff.chunk.js",
+    "static/js/2.261beeff.chunk.js.map": "/static/js/2.261beeff.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.bc1abc38d290a19113dbd0a4fd1ea3fc.js": "/precache-manifest.bc1abc38d290a19113dbd0a4fd1ea3fc.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.764ccc25.chunk.css.map": "/static/css/2.764ccc25.chunk.css.map",
+    "static/js/2.261beeff.chunk.js.LICENSE.txt": "/static/js/2.261beeff.chunk.js.LICENSE.txt",
+    "static/media/opq-logo.svg": "/static/media/opq-logo.3153ffe8.svg",
+    "static/media/upload.svg": "/static/media/upload.fefec929.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.107bb8ca.js",
+    "static/css/2.764ccc25.chunk.css",
+    "static/js/2.261beeff.chunk.js",
+    "static/js/main.36b829e2.chunk.js"
+  ]
+}
