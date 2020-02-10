@@ -5,11 +5,11 @@ const serveIndex = require("serve-index");
 const path = require("path");
 const api = require("./api");
 
-app.use(bodyParser.json({ limit: "3mb" }));
+app.use(bodyParser.json({ limit: "15mb" }));
 app.use(
   bodyParser.urlencoded({
     extended: true,
-    limit: "5mb",
+    limit: "15mb",
     parameterLimit: 100000
   })
 );
