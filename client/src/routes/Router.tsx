@@ -13,8 +13,8 @@ function Router() {
     <BrowserRouter history={history}>
       <Navbar />
       <Switch>
-        <Route path="/" component={FileUpload} exact />
-        <Route path="/:handle" component={ImagePage} />
+        <Route path="/share/:handle" component={ImagePage} />
+        <Route path="/" component={FileUpload} />
       </Switch>
     </BrowserRouter>
   );

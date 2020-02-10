@@ -21,15 +21,15 @@ app.use(
   serveIndex(".well-known")
 );
 
-app.get("/", function(req, res) {
-  res.sendFile(path.join(__dirname, "/public", "index.html"));
-});
-
 app.use(
   express.static(path.join(__dirname, "/public"), {
     maxage: 86400000 * 7
   })
 );
+
+app.get("/*", function(req, res) {
+  res.sendFile(path.join(__dirname, "/public", "index.html"));
+});
 
 app.listen(3000, () => {
   console.log("listening on port 3000");

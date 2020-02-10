@@ -43,7 +43,9 @@ function FileUpload() {
     : "Upload your image";
 
   useEffect(() => {
-    history.push(responseData?.data?.imageDetails?.handle);
+    if (responseData) {
+      history.push('/share/' + responseData?.data?.imageDetails?.handle);
+    }
   }, [history, responseData]);
 
   function handleChange(e: React.FormEvent<HTMLInputElement>) {
