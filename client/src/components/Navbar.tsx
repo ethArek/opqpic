@@ -37,6 +37,10 @@ const Logo = styled(Link)`
     font-size: 14px;
     font-weight: 400;
     margin: 0;
+
+    @media screen and (max-width: 500px) {
+      display: none;
+    }
   }
 `;
 

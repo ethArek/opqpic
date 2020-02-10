@@ -145,10 +145,12 @@ const fadeIn = keyframes`
 `;
 
 const Wrapper = styled.div`
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
+  min-width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 0 20px;
   animation: ${fadeIn} 1s linear;
 `;
 
@@ -157,6 +159,7 @@ const Header = styled.h1`
   font-size: 42px;
   margin-bottom: 20px;
   text-align: center;
+  word-break: break-all;
 `;
 
 const Label = styled.label`
@@ -165,6 +168,8 @@ const Label = styled.label`
   align-items: center;
   width: 400px;
   height: 300px;
+  max-width: 90vw;
+  max-height: 90vh;
   border: 3px dashed #4257f5;
   margin-bottom: 40px;
   cursor: pointer;
@@ -194,6 +199,7 @@ const Name = styled.h2`
   font-size: 32px;
   color: #333;
   text-align: center;
+  word-break: break-all;
 
   &:hover {
     text-decoration: line-through;

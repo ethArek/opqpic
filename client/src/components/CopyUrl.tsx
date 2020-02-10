@@ -33,6 +33,18 @@ const Wrapper = styled.div`
     box-shadow: unset;
     border-radius: 5px;
     margin-right: 16px;
+    max-width: 90vw;
+  }
+
+  @media screen and (max-width: 768px) {
+    display: block;
+    text-align: center;
+
+    input {
+      margin-bottom: 16px;
+      height: 40px;
+
+    }
   }
 `;
 
