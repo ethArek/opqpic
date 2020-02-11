@@ -31,6 +31,12 @@ const Wrapper = styled.div`
   right: 40px;
   text-align: center;
 
+  @media screen and (max-width: 992px) {
+    position: static;
+    width: 80px;
+    margin: 20px 40px 0 auto;
+  }
+
   span {
     display: inline-block;
     margin-bottom: 8px;

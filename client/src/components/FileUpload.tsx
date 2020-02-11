@@ -149,7 +149,7 @@ const fadeIn = keyframes`
 
 const Wrapper = styled.div`
   min-width: 100vw;
-  min-height: calc(100vh - 83px);
+  min-height: calc(100vh - 159px);
   display: flex;
   justify-content: center;
   align-items: center;
