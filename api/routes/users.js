@@ -3,7 +3,7 @@ const User = require("../../models/User");
 const { login } = require("../lib/internal/users");
 const createErrorResponse = require("../lib/internal/createErrorResponse");
 const auth = require("../middlewares/authentication");
-const { uploadImage } = require("../lib/internal/images");
+const { uploadImage, getUserImages } = require("../lib/internal/images");
 require("../../db");
 
 router.post("/", async (req, res) => {
@@ -50,12 +50,32 @@ router.post("/images", auth, async (req, res) => {
 
   try {
     const imageDetails = await uploadImage(fileBase64, name);
-    req.user.imageHandles.push(imageDetails.handle);
+
+    const image = {
+      name,
+      handle: imageDetails.handle
+    };
+
+    req.user.images.push(image);
     await req.user.save();
 
     res.status(201).json({
       data: {
         imageDetails
+      }
+    });
+  } catch (err) {
+    createErrorResponse(res, err);
+  }
+});
+
+router.get("/images", async (req, res) => {
+  try {
+    const images = await getUserImages(req.user);
+
+    res.json({
+      data: {
+        images
       }
     });
   } catch (err) {

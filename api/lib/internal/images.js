@@ -1,5 +1,5 @@
 const getOpqHandler = require("../opq/getOpqHandler");
-
+const uuid = require("uuid");
 const { opqAccountHandle } = require("../../../config");
 const opqHandler = getOpqHandler(opqAccountHandle);
 
@@ -35,4 +35,8 @@ async function getDownloadUrl(handle) {
   return imageFile;
 }
 
-module.exports = { uploadImage, getDownloadUrl };
+async function getUserImages(user) {
+  return user.images;
+}
+
+module.exports = { uploadImage, getDownloadUrl, getUserImages };

@@ -23,9 +23,24 @@ const UserSchema = new mongoose.Schema({
     required: [true, "Password wasn't provided"],
     minlength: [6, "Password need to have more than 6 characters"]
   },
-  imageHandles: [
+  images: [
     {
-      type: String
+      name: {
+        type: String,
+        required: true
+      },
+      handle: {
+        type: String,
+        required: true
+      },
+      alternativeHandle: {
+        type: String,
+        required: false
+      },
+      createdAt: {
+        type: Date,
+        default: Date.now
+      }
     }
   ],
   active: {
