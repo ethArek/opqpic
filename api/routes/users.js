@@ -61,7 +61,7 @@ router.post("/images", auth, async (req, res) => {
 
     res.status(201).json({
       data: {
-        imageDetails
+        imageDetails: req.user.images[req.user.images.length - 1]
       }
     });
   } catch (err) {
@@ -69,7 +69,7 @@ router.post("/images", auth, async (req, res) => {
   }
 });
 
-router.get("/images", async (req, res) => {
+router.get("/images", auth, async (req, res) => {
   try {
     const images = await getUserImages(req.user);
 
