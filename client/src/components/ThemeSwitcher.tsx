@@ -32,9 +32,15 @@ const Wrapper = styled.div`
   text-align: center;
 
   @media screen and (max-width: 992px) {
+    background-color: ${({ theme }) =>
+      theme.theme === 'light' ? Colors.WHITE : Colors.BLACK};
     position: static;
-    width: 80px;
-    margin: 20px 40px 0 auto;
+    padding: 20px;
+    text-align: right;
+
+    label {
+      margin-left: auto;
+    }
   }
 
   span {

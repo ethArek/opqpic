@@ -148,7 +148,6 @@ const fadeIn = keyframes`
 `;
 
 const Wrapper = styled.div`
-  min-width: 100vw;
   min-height: calc(100vh - 159px);
   display: flex;
   justify-content: center;
@@ -157,6 +156,10 @@ const Wrapper = styled.div`
   padding: 0 20px;
   background-color: ${({ theme }) =>
     theme.theme === 'light' ? Colors.WHITE : Colors.BLACK};
+
+  @media screen and (min-width: 992px) {
+    min-height: calc(100vh - 83px);
+  }
 `;
 
 const AnimationWrapper = styled.div`
