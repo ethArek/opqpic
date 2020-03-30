@@ -26,6 +26,7 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   color: ${Colors.WHITE};
+  height: 83px;
 `;
 
 const Logo = styled(Link)`
