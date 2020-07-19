@@ -20,7 +20,7 @@
     "crypto": "^1.0.1",
     "express": "^4.17.1",
     "jsonwebtoken": "^8.5.1",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "mongoose": "^5.8.11",
     "nodemon": "^2.0.2",
     "opaque": "https://github.com/opacity/opaque.git#0.4.2",
