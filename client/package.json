@@ -14,7 +14,7 @@
     "@types/react-router-dom": "^5.1.3",
     "@types/react-typist": "^2.0.1",
     "@types/styled-components": "^4.4.2",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "history": "^4.10.1",
     "normalize.css": "^8.0.1",
     "opaque": "https://github.com/opacity/opaque.git#0.4.2",
