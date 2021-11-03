@@ -27,6 +27,6 @@
     "request": "^2.88.0",
     "uuid": "^3.4.0",
     "serve-index": "^1.9.1",
-    "validator": "^12.2.0"
+    "validator": "^13.7.0"
   }
 }
